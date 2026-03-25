@@ -1,0 +1,17 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Node / React
+node_modules/
+dist/
+.env
+
+# OS Files
+.DS_Store
+
+# Machine Learning Models
+*.pkl
+model/cost_model.pkl
+model/co2_model.pkl
