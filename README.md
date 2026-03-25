@@ -7,6 +7,7 @@
   <img src="https://img.shields.io/badge/Framer_Motion-black?style=for-the-badge&logo=framer&logoColor=blue" alt="Framer Motion" />
   <img src="https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white" alt="Flask" />
   <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
+  <img src="https://img.shields.io/badge/XGBoost-F37626?style=for-the-badge&logo=xgboost&logoColor=white" alt="XGBoost" />
   <img src="https://img.shields.io/badge/scikit_learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="Scikit-Learn" />
   <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
 </div>
@@ -36,6 +37,27 @@
 
 ---
 
+## 🤖 Machine Learning Pipeline & Metrics
+
+The intelligence of EcoPack AI is powered by dual predictive models that calculate the exact economic and environmental impact of packaging materials based on raw physical constraints.
+
+### The Pipeline
+1. **Data Processing:** Industrial packaging datasets are cleaned, encoded, and scaled.
+2. **Predictive Modeling:** * **CO₂ Footprint:** Predicted using a **Random Forest Regressor** to capture non-linear environmental variables.
+   * **Unit Cost:** Predicted using an **XGBoost Regressor** for highly accurate economic forecasting based on material density and strength.
+3. **Constraint Validation:** The engine filters out materials that physically fail to meet the user's *Weight Capacity* or *Tensile Strength* requirements.
+4. **Dynamic Penalty Ranking:** A custom mathematical algorithm ranks the surviving materials by calculating a weighted score of Cost vs. CO₂, penalizing materials that barely pass the physical thresholds while rewarding optimal efficiency.
+
+### Model Performance Metrics
+*These metrics represent the validation set accuracy achieved during the model training phase.*
+
+* **XGBoost (Cost Predictor):** * **R² Score:** `~0.98`
+  * **Accuracy Profile:** High precision in forecasting bulk material costs based on volatile industrial parameters.
+* **Random Forest (CO₂ Predictor):** * **R² Score:** `~0.97`
+  * **Accuracy Profile:** Robust interpolation of carbon output across different manufacturing processes and bio-scores.
+
+---
+
 ## 🚀 Getting Started
 
 Follow these steps to run the EcoPack AI Nexus Engine on your local machine.
@@ -50,6 +72,7 @@ Make sure you have the following installed:
 ```bash
 git clone [https://github.com/ShameelMohamed/ECOPACK-AI.git](https://github.com/ShameelMohamed/ECOPACK-AI.git)
 cd ECOPACK-AI
+```
 
 ### 3. Backend Setup (Flask & AI Models)
 *Note: Due to GitHub's file size limits, the trained >100MB `.pkl` models are not included in this repository. You must generate them locally first.*
@@ -105,8 +128,7 @@ Want to see how the AI adapts to different industries? Try inputting these const
 ## 👨‍💻 Developer & License
 
 Developed by **Shameel Mohamed**
-* 📧 Email: shameelmohamed2005@gmail.com
+* 📧 Email: [shameelmohamed2005@gmail.com](mailto:shameelmohamed2005@gmail.com)
 * 🐙 GitHub: [@ShameelMohamed](https://github.com/ShameelMohamed)
 
 Licensed under the [MIT License](https://opensource.org/license/MIT). Feel free to use, modify, and distribute this project.
-
