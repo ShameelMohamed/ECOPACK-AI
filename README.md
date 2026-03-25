@@ -1,5 +1,4 @@
 
-```markdown
 # 🍃 EcoPack AI: Nexus Supply Chain Engine
 
 <div align="center">
@@ -51,7 +50,6 @@ Make sure you have the following installed:
 ```bash
 git clone [https://github.com/ShameelMohamed/ECOPACK-AI.git](https://github.com/ShameelMohamed/ECOPACK-AI.git)
 cd ECOPACK-AI
-```
 
 ### 3. Backend Setup (Flask & AI Models)
 *Note: Due to GitHub's file size limits, the trained >100MB `.pkl` models are not included in this repository. You must generate them locally first.*
