@@ -14,5 +14,7 @@ dist/
 # Machine Learning Models
 *.pkl
 
+model/
+!model/
 model/*
 !model/train.py
