@@ -13,5 +13,6 @@ dist/
 
 # Machine Learning Models
 *.pkl
-model/cost_model.pkl
-model/co2_model.pkl
+
+model/*
+!model/train.py
