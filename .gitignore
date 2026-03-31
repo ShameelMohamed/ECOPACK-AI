@@ -17,4 +17,4 @@ dist/
 model/
 !model/
 model/*
-!model/train.py
+!model/train_models.py
