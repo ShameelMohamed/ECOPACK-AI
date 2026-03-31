@@ -351,6 +351,11 @@ function App() {
                 <div className="deep-dive-grid">
                   {results.map((item, idx) => {
                     const score = getSustainabilityScore(item, idx, formData); 
+                    
+                    // FIX: Convert the string state to actual Numbers before adding
+                    const bioDisplay = Number(formData.biodegradability_score) + (idx * 2);
+                    const recyDisplay = Number(formData.recyclability_percent) + (idx * 1);
+
                     return (
                       <motion.div 
                         key={idx} 
@@ -364,15 +369,15 @@ function App() {
                         <ul className="dd-list">
                           <li><span>Cost/unit</span> <span className="cyan-text">₹{item.cost_inr.toLocaleString()}</span></li>
                           <li><span>CO₂</span> <span className="cyan-text">{item.co2_kg} kg</span></li>
-                          <li><span>Biodegradable</span> <span className="white-text">{formData.biodegradability_score + (idx * 2)}%</span></li>
-                          <li><span>Recyclability</span> <span className="white-text">{formData.recyclability_percent + (idx * 1)}%</span></li>
+                          <li><span>Biodegradable</span> <span className="white-text">{bioDisplay}%</span></li>
+                          <li><span>Recyclability</span> <span className="white-text">{recyDisplay}%</span></li>
                         </ul>
                         <div className="dd-score-section">
                           <div className="dd-score-text"><span>Sustainability Score</span> <span className="green-text">{score}/100</span></div>
                           <div className="progress-bar-bg"><div className="progress-bar-fill" style={{ width: `${score}%` }}></div></div>
                         </div>
                         <p className="dd-reasoning">
-                          Best choice because: highly biodegradable ({formData.biodegradability_score + (idx * 2)}%), excellent recyclability, and cost-efficient relative to CO2 output.
+                          Best choice because: highly biodegradable ({bioDisplay}%), excellent recyclability, and cost-efficient relative to CO2 output.
                         </p>
                       </motion.div>
                     );
