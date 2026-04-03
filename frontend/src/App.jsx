@@ -50,7 +50,8 @@ function App() {
     setLoading(true);
     setResults(null);
     try {
-      const response = await axios.post('http://127.0.0.1:5000/api/recommend', {
+      const BACKEND_URL = "https://symmetrical-barnacle-x5gxjw595743vq9j-5000.app.github.dev";
+      const response = await axios.post(`${BACKEND_URL}/api/recommend`, {
         ...formData,
         weight_capacity_kg: parseFloat(formData.weight_capacity_kg),
         tensile_strength_mpa: parseFloat(formData.tensile_strength_mpa),
