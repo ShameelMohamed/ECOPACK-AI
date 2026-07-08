@@ -52,7 +52,7 @@ function App() {
     try {
       // Connect to your Hugging Face Space. 
       // Replace "ShameelMohamed/EcoPack-Backend" with your actual HF username and space name!
-      const client = await Client.connect("ShameelMohamed/EcoPack-Backend");
+      const client = await Client.connect("Shameelx08/EcoPack-Backend");
       
       // Call the API. Gradio expects arguments in the exact order they appear in the Python gr.Interface inputs array.
       const response = await client.predict("/predict", { 
