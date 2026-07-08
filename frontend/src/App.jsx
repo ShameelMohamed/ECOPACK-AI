@@ -7,7 +7,7 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable'; 
 import html2canvas from 'html2canvas';
 import './App.css';
-
+import { Client } from "@gradio/client";
 function App() {
   const [loadingApp, setLoadingApp] = useState(true);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -45,37 +45,42 @@ function App() {
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setResults(null);
     try {
-      const BACKEND_URL = "https://symmetrical-barnacle-x5gxjw595743vq9j-5000.app.github.dev";
-      const response = await axios.post(`${BACKEND_URL}/api/recommend`, {
-        ...formData,
-        weight_capacity_kg: parseFloat(formData.weight_capacity_kg),
-        tensile_strength_mpa: parseFloat(formData.tensile_strength_mpa),
-        biodegradability_score: parseFloat(formData.biodegradability_score),
-        recyclability_percent: parseFloat(formData.recyclability_percent)
+      // Connect to your Hugging Face Space. 
+      // Replace "ShameelMohamed/EcoPack-Backend" with your actual HF username and space name!
+      const client = await Client.connect("ShameelMohamed/EcoPack-Backend");
+      
+      // Call the API. Gradio expects arguments in the exact order they appear in the Python gr.Interface inputs array.
+      const response = await client.predict("/predict", { 
+        category: formData.category_name, 
+        weight: parseFloat(formData.weight_capacity_kg), 
+        strength: parseFloat(formData.tensile_strength_mpa), 
+        biodegradability: parseFloat(formData.biodegradability_score), 
+        recyclability: parseFloat(formData.recyclability_percent), 
       });
-      setTimeout(() => {
-        const simResults = response.data.recommendations;
-        setResults(simResults);
-        
-        const now = new Date();
-        const timeString = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
-        setTimestamp(timeString);
-        
-        setHistory(prev => [
-          { id: Date.now(), time: timeString, product: formData.product_name, category: formData.category_name, topMatch: simResults[0].material }, 
-          ...prev
-        ]);
-        
-        setLoading(false);
-      }, 800);
+
+      // The response.data will contain the array of recommendations returned by our Python function
+      const simResults = response.data[0]; 
+      setResults(simResults);
+      
+      const now = new Date();
+      const timeString = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+      setTimestamp(timeString);
+      
+      setHistory(prev => [
+        { id: Date.now(), time: timeString, product: formData.product_name, category: formData.category_name, topMatch: simResults[0].material }, 
+        ...prev
+      ]);
+      
+      setLoading(false);
+      
     } catch (error) {
-      console.error("Error fetching prediction:", error);
-      alert("Backend offline! Make sure Flask is running.");
+      console.error("Error fetching prediction from Hugging Face:", error);
+      alert("AI Engine offline! Check your Hugging Face Space.");
       setLoading(false);
     }
   };
