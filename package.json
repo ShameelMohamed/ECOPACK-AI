@@ -1,8 +1,12 @@
 {
   "dependencies": {
+    "@gradio/client": "^2.3.1",
+    "framer-motion": "^12.38.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^4.2.1",
     "jspdf-autotable": "^5.0.7",
-    "react-to-print": "^3.3.0"
+    "lucide-react": "^1.7.0",
+    "react-to-print": "^3.3.0",
+    "recharts": "^3.8.1"
   }
 }
