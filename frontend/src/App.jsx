@@ -56,13 +56,14 @@ function App() {
       
       // Call the API. Gradio expects arguments in the exact order they appear in the Python gr.Interface inputs array.
       // Call the API with the correct endpoint name
-      const response = await client.predict("/get_recommendations", { 
-        category: formData.category_name, 
-        weight: parseFloat(formData.weight_capacity_kg), 
-        strength: parseFloat(formData.tensile_strength_mpa), 
-        biodegradability: parseFloat(formData.biodegradability_score), 
-        recyclability: parseFloat(formData.recyclability_percent), 
-      });
+      // Call the API using a strict array. Order matters!
+      const response = await client.predict("/get_recommendations", [
+        formData.category_name, 
+        parseFloat(formData.weight_capacity_kg), 
+        parseFloat(formData.tensile_strength_mpa), 
+        parseFloat(formData.biodegradability_score), 
+        parseFloat(formData.recyclability_percent)
+      ]);
 
       // The response.data will contain the array of recommendations returned by our Python function
       const simResults = response.data[0]; 
