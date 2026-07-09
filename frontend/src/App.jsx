@@ -55,7 +55,8 @@ function App() {
       const client = await Client.connect("Shameelx08/EcoPack-Backend");
       
       // Call the API. Gradio expects arguments in the exact order they appear in the Python gr.Interface inputs array.
-      const response = await client.predict("/predict", { 
+      // Call the API with the correct endpoint name
+      const response = await client.predict("/get_recommendations", { 
         category: formData.category_name, 
         weight: parseFloat(formData.weight_capacity_kg), 
         strength: parseFloat(formData.tensile_strength_mpa), 
